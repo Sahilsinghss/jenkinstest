@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: nodeserver
-        image: dynamic/devops:latest
+        image: dynamicdevops/docker-image:latest
         ports:
         - containerPort: 3000
         

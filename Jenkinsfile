@@ -1,7 +1,7 @@
 pipeline {
 
   environment {
-    dockerimagename = "dynamic/devops"
+    dockerimagename = "dynamicdevops/docker-image"
     dockerImage = ""
   }
 

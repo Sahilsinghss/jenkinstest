@@ -3,6 +3,12 @@ pipeline {
   environment {
     dockerimagename = "dynamicdevops/docker-image"
     dockerImage = ""
+    OPENSHIFT_URL = 'https://api.sandbox-m2.ll9k.p1.openshiftapps.com:6443'
+    OPENSHIFT_TOKEN = credentials('sha256~M7z9j_7ftYUz6_J1W21HWlp5pKBuhmLCXuu-yNiBTm0')
+    DOCKER_HUB_CREDENTIALS = credentials('docker-hub-credentials-id')
+    DOCKER_IMAGE_NAME = 'dynamicdevops/docker-image:latest'
+    OPENSHIFT_PROJECT = 'your-openshift-project'
+    APP_NAME = 'nodejs-app'
   }
 
   agent any
@@ -36,13 +42,21 @@ pipeline {
       }
     }
 
-    stage('Deploying App to Kubernetes') {
-      steps {
-        script {
-          kubernetesDeploy(configs: "deploymentservice.yml", kubeconfigId: "kubernetes")
+    stage('Deploy to OpenShift') {
+        steps {
+            script {
+                // Login to OpenShift
+                sh "oc login --token=${OPENSHIFT_TOKEN} --server=${OPENSHIFT_URL} --insecure-skip-tls-verify"
+
+                // Set OpenShift project
+                sh "oc project ${OPENSHIFT_PROJECT}"
+
+                // Deploy the application from the Docker image on Docker Hub
+                sh "oc new-app ${DOCKER_IMAGE_NAME} --name=${APP_NAME}"
+            }
         }
-      }
     }
+}
 
   }
 

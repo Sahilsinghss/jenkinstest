@@ -11,7 +11,7 @@ pipeline {
 
     stage('Checkout Source') {
       steps {
-        git 'https://github.com/Sahilsinghss/jenkinstest.git'
+        git branch: 'main', credentialsId: '92ec0319-697f-49d3-b22d-a99a7f8439e8', url: 'https://github.com/Sahilsinghss/jenkinstest.git'
       }
     }
 

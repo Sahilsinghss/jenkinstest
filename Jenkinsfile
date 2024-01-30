@@ -4,7 +4,7 @@ pipeline {
     dockerimagename = "dynamicdevops/docker-image"
     dockerImage = ""
     OPENSHIFT_URL = 'https://api.sandbox-m2.ll9k.p1.openshiftapps.com:6443'
-    OPENSHIFT_TOKEN = credentials('sha256~M7z9j_7ftYUz6_J1W21HWlp5pKBuhmLCXuu-yNiBTm0')
+    OPENSHIFT_TOKEN = 'sha256~M7z9j_7ftYUz6_J1W21HWlp5pKBuhmLCXuu-yNiBTm0'
     DOCKER_HUB_CREDENTIALS = credentials('docker-hub-credentials-id')
     DOCKER_IMAGE_NAME = 'dynamicdevops/docker-image:latest'
     OPENSHIFT_PROJECT = 'your-openshift-project'
